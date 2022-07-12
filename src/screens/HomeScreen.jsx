@@ -1,24 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native"; //componente StyleSheet para estilos ya que react-native no puede cargar hojas de estilo
+import NavBar from "../components/NavBar";
+import { StyleSheet, Text, View, ScrollView } from "react-native"; //componente StyleSheet para estilos ya que react-native no puede cargar hojas de estilo
+import Hero from "../components/Hero";
+import ActionTravel from "../components/ActionTravel";
 
 export default function App() {
 	return (
-		<View style={styles.container}>
-			{/*entrando a la propiedad de styles*/}
-			<Text>Hello World!</Text>
-			<Text>Welcome to my world</Text>
-			<Text>MyTinerary hello</Text>
-			<Text>Probando my native app</Text>
+		<ScrollView>
+			<NavBar />
+			<Hero />
+			<ActionTravel />
 			<StatusBar style="auto" />
-		</View>
+		</ScrollView>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "red",
-		alignItems: "center",
-		justifyContent: "center",
-	},
-});
