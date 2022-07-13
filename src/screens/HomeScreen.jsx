@@ -5,7 +5,7 @@ import Hero from "../components/Hero";
 import ActionTravel from "../components/ActionTravel";
 import Carousel from "../components/Carousel";
 
-export default function App() {
+export default function Homescreen() {
 	return (
 		<ScrollView>
 			<NavBar />

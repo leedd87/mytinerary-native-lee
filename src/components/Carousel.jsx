@@ -60,7 +60,7 @@ function Backdrop({ scrollX }) {
 
 export default function Carousel() {
 	const scrollX = React.useRef(new Animated.Value(0)).current;
-	console.log(data);
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<StatusBar hidden />

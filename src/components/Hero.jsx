@@ -1,12 +1,4 @@
-import {
-	StyleSheet,
-	Text,
-	View,
-	TouchableWithoutFeedback,
-	Alert,
-	ScrollView,
-	ImageBackground,
-} from "react-native"; //componente StyleSheet para estilos ya que react-native no puede cargar hojas de estilo
+import { StyleSheet, Text, View, ImageBackground } from "react-native"; //componente StyleSheet para estilos ya que react-native no puede cargar hojas de estilo
 
 const hero = { uri: "https://wallpaperaccess.com/full/2146330.jpg" };
 
