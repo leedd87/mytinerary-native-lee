@@ -23,7 +23,7 @@ function ActionTravel() {
 					onPress={() => Alert.alert("Simple Button pressed")}
 				>
 					<Text style={{ color: "#fff", textAlign: "center" }}>
-						Login iOS
+						Travel
 					</Text>
 				</TouchableOpacity>
 			</View>
