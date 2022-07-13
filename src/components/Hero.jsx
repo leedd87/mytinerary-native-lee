@@ -1,5 +1,3 @@
-import { StatusBar } from "expo-status-bar";
-import NavBar from "../components/NavBar";
 import {
 	StyleSheet,
 	Text,
@@ -39,7 +37,7 @@ const stylesHero = StyleSheet.create({
 	},
 	heroText: {
 		color: "black",
-		fontSize: 20,
+		fontSize: 22,
 		textAlign: "center",
 		backgroundColor: "#f5f5f5",
 		width: "100%",
