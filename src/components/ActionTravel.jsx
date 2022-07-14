@@ -13,14 +13,14 @@ const hero = {
 	uri: "https://as2.ftcdn.net/v2/jpg/02/97/64/19/1000_F_297641938_ti60o618SDDaKfQLhyQvpcL4nDcs2Hkm.jpg",
 };
 
-function ActionTravel() {
+function ActionTravel({ navigation }) {
 	return (
 		<>
 			<View style={styleAction.container}>
 				<Text style={styleAction.actionText}>Discover Korea with Us</Text>
 				<TouchableOpacity
 					style={styleAction.buttonTravel}
-					onPress={() => Alert.alert("Simple Button pressed")}
+					onPress={() => navigation.navigate("Cities")}
 				>
 					<Text style={{ color: "#fff", textAlign: "center" }}>
 						Travel

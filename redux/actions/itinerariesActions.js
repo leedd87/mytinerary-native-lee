@@ -4,6 +4,18 @@ import axios from "axios";
 const url = "https://mytinerary-lee-backend.herokuapp.com/";
 
 const itinerariesActions = {
+	getItineraries: () => {
+		return async (dispatch, getState) => {
+			const res = await axios.get(url + "api/itineraries");
+			// console.log(res);
+			dispatch({
+				type: "GET_ITINERARIES",
+				payload: res.data.response.itineraries,
+			});
+			// console.log(res.data.response.cities);
+		};
+	},
+
 	findItineraryFromCity: (id) => {
 		return async (dispatch, getState) => {
 			const res = await axios.get(url + `api/itineraries/cities/${id}`);

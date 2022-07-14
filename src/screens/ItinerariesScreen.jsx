@@ -12,44 +12,34 @@ import {
 import React from "react";
 import CitiesCards from "../components/CitiesCards";
 import { useEffect, useState } from "react";
-
+import itinerariesActions from "../../redux/actions/itinerariesActions";
 import citiesActions from "../../redux/actions/citiesActions";
 import { useDispatch, useSelector } from "react-redux";
-
+import ItinerariesCard from "../components/ItinierariesCard";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const CitiesScreen = ({ navigation }) => {
+const ItinerariesScreen = ({ route, navigation }) => {
 	const [input, setInput] = useState("");
 	const dispatch = useDispatch();
-
-	// useEffect(() => {
-	// 	dispatch(citiesActions.getCities());
-	// 	//eslint-disable-next-line
-	// }, [cities]);
+	const { id } = route.params;
+	console.log(id);
 
 	useEffect(() => {
-		dispatch(citiesActions.filterCities(input));
-	}, [input]);
+		dispatch(itinerariesActions.getItineraries());
+	}, []);
 
 	// const cities = useSelector((store) => store.citiesReducer.cities);
-	const citiesFiltered = useSelector(
-		(store) => store.citiesReducer.filterCities
+	const itineraries = useSelector(
+		(store) => store.itinerariesReducer.itineraries
 	);
 
 	return (
 		<SafeAreaView>
 			<View style={{ backgroundColor: "#30475E", height: height }}>
-				<TextInput
-					style={stylesInput.input}
-					onChangeText={(text) => setInput(text)}
-					value={input}
-					placeholder="City"
-					keyboardType="default"
-				/>
-				{citiesFiltered.length > 0 ? (
+				{itineraries.length > 0 ? (
 					<FlatList
-						data={citiesFiltered && citiesFiltered}
+						data={itineraries && itineraries}
 						showsVerticalScrollIndicator={false}
 						renderItem={({ item, index }) => {
 							return (
@@ -57,7 +47,7 @@ const CitiesScreen = ({ navigation }) => {
 									key={index}
 									style={stylesCitiesScreen.citiesContainer}
 								>
-									<CitiesCards city={item} navigation={navigation} />
+									<ItinerariesCard itineraries={item} />
 								</View>
 							);
 						}}
@@ -72,7 +62,7 @@ const CitiesScreen = ({ navigation }) => {
 	);
 };
 
-export default CitiesScreen;
+export default ItinerariesScreen;
 
 const styles = StyleSheet.create({
 	container: {

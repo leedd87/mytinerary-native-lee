@@ -16,6 +16,12 @@ const itinerariesReducer = (state = initialState, action) => {
 				...state,
 				itinerary: action.payload,
 			};
+
+		case "GET_ITINERARIES":
+			return {
+				...state,
+				itineraries: action.payload,
+			};
 		default:
 			return state;
 	}

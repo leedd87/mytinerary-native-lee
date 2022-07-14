@@ -1,27 +1,21 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 
-const CitiesCards = ({ city, navigation }) => {
-	console.log(city);
+const ItinerariesCard = ({ itineraries, navigation }) => {
 	return (
 		<View style={styles.container}>
 			<Image
 				source={{
-					uri: city.image,
+					uri: itineraries.image,
 				}}
 				style={{ height: 200 }}
 			/>
-			<Text
-				style={styles.text}
-				onPress={() => navigation.navigate("Itineraries", { id: city._id })}
-			>
-				{city.name}
-			</Text>
+			<Text style={styles.text}>{itineraries.name}</Text>
 		</View>
 	);
 };
 
-export default CitiesCards;
+export default ItinerariesCard;
 
 const styles = StyleSheet.create({
 	container: {

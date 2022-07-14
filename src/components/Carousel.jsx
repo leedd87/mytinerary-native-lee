@@ -96,7 +96,6 @@ export default function Carousel() {
 					});
 					return (
 						<View style={{ width: CONTAINER_WIDTH }}>
-							<Text>Popular MyTineraries</Text>
 							<Animated.View
 								style={{
 									marginHorizontal: SPACE,
