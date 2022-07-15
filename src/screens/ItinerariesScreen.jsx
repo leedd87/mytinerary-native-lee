@@ -87,6 +87,15 @@ const ItinerariesScreen = ({ navigation, route }) => {
 												Itinerary: {item.itineraryName}
 											</Text>
 										</TouchableOpacity>
+										<TouchableOpacity
+											onPress={() =>
+												navigation.navigate("Comments", {
+													id: item._id,
+												})
+											}
+										>
+											<Text>SHOW COMMENTS</Text>
+										</TouchableOpacity>
 									</View>
 									{/* <View style={stylesCardItinerary.container}>
 										<Image
