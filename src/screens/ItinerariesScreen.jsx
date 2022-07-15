@@ -8,6 +8,7 @@ import {
 	Dimensions,
 	TextInput,
 	FlatList,
+	TouchableOpacity,
 } from "react-native";
 import React from "react";
 import CitiesCards from "../components/CitiesCards";
@@ -19,25 +20,26 @@ import ItinerariesCard from "../components/ItinierariesCard";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const ItinerariesScreen = ({ route, navigation }) => {
+const ItinerariesScreen = ({ navigation, route }) => {
 	const [input, setInput] = useState("");
 	const dispatch = useDispatch();
 	const { id } = route.params;
 	console.log(id);
 
 	useEffect(() => {
-		dispatch(itinerariesActions.getItineraries());
+		dispatch(itinerariesActions.findItineraryFromCity(id));
 	}, []);
 
 	// const cities = useSelector((store) => store.citiesReducer.cities);
 	const itineraries = useSelector(
 		(store) => store.itinerariesReducer.itineraries
 	);
+	console.log(itineraries);
 
 	return (
 		<SafeAreaView>
 			<View style={{ backgroundColor: "#30475E", height: height }}>
-				{itineraries.length > 0 ? (
+				{itineraries ? (
 					<FlatList
 						data={itineraries && itineraries}
 						showsVerticalScrollIndicator={false}
@@ -47,7 +49,58 @@ const ItinerariesScreen = ({ route, navigation }) => {
 									key={index}
 									style={stylesCitiesScreen.citiesContainer}
 								>
-									<ItinerariesCard itineraries={item} />
+									{/* ITINERARIES--START */}
+									<View style={stylesCardItinerary.container}>
+										<TouchableOpacity
+											style={styleAction.buttonTravel}
+											onPress={() =>
+												navigation.navigate("Activities", {
+													id: item._id,
+												})
+											}
+										>
+											<Image
+												source={{
+													uri: item.image,
+												}}
+												style={{
+													height: 65,
+													width: 65,
+													borderRadius: 50,
+												}}
+											/>
+											<Text style={stylesCardItinerary.text}>
+												{item.name}
+											</Text>
+											<Text style={stylesCardItinerary.text}>
+												Price: {item.price}
+											</Text>
+											<Text style={stylesCardItinerary.text}>
+												Likes: {item.likes.length}
+											</Text>
+											{/* <Text style={stylesCardItinerary.text}>{itineraries.hashtags}</Text> esto hay que mapearlo */}
+											<Text style={stylesCardItinerary.text}>
+												duration: {item.duration}
+											</Text>
+											{/* <Text style={stylesCardItinerary.text}>{itineraries.comments}</Text> esto hay que mapearlo */}
+											<Text style={stylesCardItinerary.text}>
+												Itinerary: {item.itineraryName}
+											</Text>
+										</TouchableOpacity>
+									</View>
+									{/* <View style={stylesCardItinerary.container}>
+										<Image
+											source={{
+												uri: item.image,
+											}}
+											style={{ height: 200 }}
+										/>
+										<Text style={stylesCardItinerary.text}>
+											{item.name}
+										</Text>
+									</View> */}
+									{/* <ItinerariesCard itineraries={item} /> */}
+									{/* ITINERARIES-END */}
 								</View>
 							);
 						}}
@@ -107,5 +160,32 @@ const stylesInput = StyleSheet.create({
 		backgroundColor: "#f5f5f5",
 		borderRadius: 10,
 		fontSize: 20,
+	},
+});
+
+const stylesCardItinerary = StyleSheet.create({
+	container: {
+		flex: 1,
+		borderColor: "#F05454",
+		borderWidth: 10,
+		borderRadius: "10%",
+		marginBottom: 20,
+		width: 280,
+		marginTop: 15,
+	},
+	text: {
+		textAlign: "center",
+		backgroundColor: "#f5f5f5",
+		fontSize: 20,
+	},
+});
+
+const styleAction = StyleSheet.create({
+	buttonTravel: {
+		// backgroundColor: "#f5f5f5",
+		padding: 10,
+		borderRadius: 5,
+		borderColor: "#f5f5f5",
+		borderWidth: 2,
 	},
 });

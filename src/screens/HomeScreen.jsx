@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation }) {
 				<Text style={styleAction.actionText}>Discover Korea with Us</Text>
 				<TouchableOpacity
 					style={styleAction.buttonTravel}
-					onPress={() => navigation.navigate("CitiesTab")}
+					onPress={() => navigation.navigate("MyCities")}
 				>
 					<Text style={{ color: "#fff", textAlign: "center" }}>
 						Travel

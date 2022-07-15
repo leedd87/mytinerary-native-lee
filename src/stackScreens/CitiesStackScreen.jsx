@@ -4,6 +4,7 @@ import React from "react";
 import ItinerariesScreen from "../screens/ItinerariesScreen";
 import CitiesScreen from "../screens/CitiesScreen";
 import CitiesCards from "../components/CitiesCards";
+import ActivitiesScreen from "../screens/ActivitiesScreen";
 
 const CitiesStack = createNativeStackNavigator();
 const CitiesStackScreen = () => {
@@ -16,6 +17,7 @@ const CitiesStackScreen = () => {
 			/>
 			{/* <CitiesStack.Screen name="Card" component={CitiesCards} /> */}
 			<CitiesStack.Screen name="Itineraries" component={ItinerariesScreen} />
+			<CitiesStack.Screen name="Activities" component={ActivitiesScreen} />
 		</CitiesStack.Navigator>
 	);
 };

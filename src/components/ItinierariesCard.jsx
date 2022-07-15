@@ -1,23 +1,45 @@
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
 const ItinerariesCard = ({ itineraries, navigation }) => {
+	console.log(itineraries._id);
 	return (
-		<View style={styles.container}>
-			<Image
-				source={{
-					uri: itineraries.image,
-				}}
-				style={{ height: 200 }}
-			/>
-			<Text style={styles.text}>{itineraries.name}</Text>
+		<View style={stylesCardItinerary.container}>
+			<TouchableOpacity
+				style={styleAction.buttonTravel}
+				onPress={() =>
+					navigation.navigate("Activities", { id: itineraries._id })
+				}
+			>
+				<Image
+					source={{
+						uri: itineraries.image,
+					}}
+					style={{ height: 65, width: 65, borderRadius: 50 }}
+				/>
+				<Text style={stylesCardItinerary.text}>{itineraries.name}</Text>
+				<Text style={stylesCardItinerary.text}>
+					Price: {itineraries.price}
+				</Text>
+				<Text style={stylesCardItinerary.text}>
+					Likes: {itineraries.likes.length}
+				</Text>
+				{/* <Text style={stylesCardItinerary.text}>{itineraries.hashtags}</Text> esto hay que mapearlo */}
+				<Text style={stylesCardItinerary.text}>
+					duration: {itineraries.duration}
+				</Text>
+				{/* <Text style={stylesCardItinerary.text}>{itineraries.comments}</Text> esto hay que mapearlo */}
+				<Text style={stylesCardItinerary.text}>
+					Itinerary: {itineraries.itineraryName}
+				</Text>
+			</TouchableOpacity>
 		</View>
 	);
 };
 
 export default ItinerariesCard;
 
-const styles = StyleSheet.create({
+const stylesCardItinerary = StyleSheet.create({
 	container: {
 		flex: 1,
 		borderColor: "#F05454",
@@ -29,7 +51,6 @@ const styles = StyleSheet.create({
 
 		// backgroundColor: "#F05454",
 		// padding: 10,
-
 		// justifyContent: "center",
 	},
 	text: {
@@ -37,5 +58,15 @@ const styles = StyleSheet.create({
 		backgroundColor: "#f5f5f5",
 		fontSize: 20,
 		// fontFamily: Poppins_500Medium,
+	},
+});
+
+const styleAction = StyleSheet.create({
+	buttonTravel: {
+		// backgroundColor: "#f5f5f5",
+		padding: 10,
+		borderRadius: 5,
+		borderColor: "#f5f5f5",
+		borderWidth: 2,
 	},
 });

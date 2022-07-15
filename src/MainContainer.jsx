@@ -53,14 +53,24 @@ const MainContainer = () => {
 					tabBarInactiveTintColor: "#F05454",
 				})}
 			>
-				<Tab.Screen name={"MyTinerary"} component={HomeStackScreen} />
+				<Tab.Screen
+					name={"MyTinerary"}
+					options={{ headerShown: false }}
+					component={HomeStackScreen}
+				/>
 				<Tab.Screen
 					name={"MyCities"}
 					component={CitiesStackScreen}
+					options={{ headerShown: false }}
+
 					// options={{ tab }}
 				/>
 				{/* <Tab.Screen name={itinerariesName} component={ItinerariesScreen} /> */}
-				<Tab.Screen name={formName} component={SignUpScreen} />
+				<Tab.Screen
+					name={formName}
+					// options={{ headerShown: false }}
+					component={SignUpScreen}
+				/>
 			</Tab.Navigator>
 		</NavigationContainer>
 	);
