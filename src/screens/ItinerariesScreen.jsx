@@ -1,27 +1,23 @@
 import {
 	StyleSheet,
 	Text,
-	ScrollView,
 	View,
 	Image,
 	SafeAreaView,
 	Dimensions,
-	TextInput,
 	FlatList,
 	TouchableOpacity,
 } from "react-native";
 import React from "react";
-import CitiesCards from "../components/CitiesCards";
 import { useEffect, useState } from "react";
 import itinerariesActions from "../../redux/actions/itinerariesActions";
-import citiesActions from "../../redux/actions/citiesActions";
 import { useDispatch, useSelector } from "react-redux";
-import ItinerariesCard from "../components/ItinierariesCard";
+import { Button } from "@rneui/themed";
+
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 const ItinerariesScreen = ({ navigation, route }) => {
-	const [input, setInput] = useState("");
 	const dispatch = useDispatch();
 	const { id } = route.params;
 	console.log(id);
@@ -35,88 +31,169 @@ const ItinerariesScreen = ({ navigation, route }) => {
 		(store) => store.itinerariesReducer.itineraries
 	);
 	console.log(itineraries);
-
+	let money = "💵 ";
 	return (
 		<SafeAreaView>
-			<View style={{ backgroundColor: "#30475E", height: height }}>
-				{itineraries ? (
+			<View
+				style={{
+					height: height,
+					backgroundColor: "#30475E",
+				}}
+			>
+				{itineraries.length > 0 ? (
 					<FlatList
 						data={itineraries && itineraries}
 						showsVerticalScrollIndicator={false}
+						// style={{}}
 						renderItem={({ item, index }) => {
 							return (
-								<View
-									key={index}
-									style={stylesCitiesScreen.citiesContainer}
-								>
-									{/* ITINERARIES--START */}
-									<View style={stylesCardItinerary.container}>
-										<TouchableOpacity
-											style={styleAction.buttonTravel}
-											onPress={() =>
-												navigation.navigate("Activities", {
-													id: item._id,
-												})
-											}
-										>
-											<Image
-												source={{
-													uri: item.image,
-												}}
-												style={{
-													height: 65,
-													width: 65,
-													borderRadius: 50,
-												}}
-											/>
+								<View key={index} style={stylesCardItinerary.container}>
+									<View style={stylesCardItinerary.textContainer}>
+										<Text style={stylesCardItinerary.text}>
+											{item.itineraryName}
+										</Text>
+									</View>
+
+									<View
+										style={{
+											flexDirection: "row",
+											justifyContent: "space-around",
+											alignItems: "center",
+											backgroundColor: "#f5f5f5",
+										}}
+									>
+										<Image
+											source={{
+												uri: item.image,
+											}}
+											style={{
+												height: 65,
+												width: 65,
+												borderRadius: 50,
+											}}
+										/>
+										<Text style={stylesCardItinerary.text}>
+											{item.name}
+										</Text>
+									</View>
+
+									<View
+										style={{
+											flexDirection: "row",
+											justifyContent: "space-around",
+											backgroundColor: "#f5f5f5",
+										}}
+									>
+										<View>
 											<Text style={stylesCardItinerary.text}>
-												{item.name}
+												Price: {money.repeat(item.price)}
 											</Text>
 											<Text style={stylesCardItinerary.text}>
-												Price: {item.price}
+												Duration: {item.duration} hs
+											</Text>
+										</View>
+
+										<View>
+											<Text style={stylesCardItinerary.text}>
+												❤️{item.likes.length} likes
 											</Text>
 											<Text style={stylesCardItinerary.text}>
-												Likes: {item.likes.length}
+												🤍{item.likes.length} likes
 											</Text>
-											{/* <Text style={stylesCardItinerary.text}>{itineraries.hashtags}</Text> esto hay que mapearlo */}
-											<Text style={stylesCardItinerary.text}>
-												duration: {item.duration}
-											</Text>
-											{/* <Text style={stylesCardItinerary.text}>{itineraries.comments}</Text> esto hay que mapearlo */}
-											<Text style={stylesCardItinerary.text}>
-												Itinerary: {item.itineraryName}
-											</Text>
-										</TouchableOpacity>
-										<TouchableOpacity
+										</View>
+									</View>
+
+									<View
+										style={{
+											flexDirection: "row",
+											padding: 10,
+											backgroundColor: "#f5f5f5",
+											justifyContent: "center",
+											alignItems: "center",
+										}}
+									>
+										<Text>#{item.hashtags[0] + " "}</Text>
+										<Text>#{item.hashtags[1] + " "}</Text>
+										<Text>#{item.hashtags[2]}</Text>
+									</View>
+
+									<View
+										style={{
+											flexDirection: "row",
+											justifyContent: "space-around",
+											alignItems: "center",
+											backgroundColor: "#f5f5f5",
+											padding: 10,
+										}}
+									>
+										<Button
 											onPress={() =>
 												navigation.navigate("Comments", {
 													id: item._id,
 												})
 											}
-										>
-											<Text>SHOW COMMENTS</Text>
-										</TouchableOpacity>
-									</View>
-									{/* <View style={stylesCardItinerary.container}>
-										<Image
-											source={{
-												uri: item.image,
+											title=""
+											icon={{
+												name: "comment",
+												type: "font-awesome",
+												size: 25,
+												color: "white",
 											}}
-											style={{ height: 200 }}
+											iconContainerStyle={
+												{
+													// marginRight: 10,
+												}
+											}
+											buttonStyle={{
+												backgroundColor: "#F05454",
+												borderColor: "transparent",
+
+												borderRadius: 30,
+											}}
+											containerStyle={{
+												width: 60,
+												margin: 10,
+											}}
 										/>
-										<Text style={stylesCardItinerary.text}>
-											{item.name}
-										</Text>
-									</View> */}
-									{/* <ItinerariesCard itineraries={item} /> */}
-									{/* ITINERARIES-END */}
+
+										<Button
+											onPress={() =>
+												navigation.navigate("Activities", {
+													id: item._id,
+												})
+											}
+											title=""
+											icon={{
+												name: "compass",
+												type: "font-awesome",
+												size: 25,
+												color: "white",
+											}}
+											iconContainerStyle={
+												{
+													// marginRight: 10,
+												}
+											}
+											buttonStyle={{
+												backgroundColor: "#F05454",
+												borderColor: "transparent",
+												borderRadius: 30,
+											}}
+											containerStyle={{
+												width: 60,
+												margin: 10,
+											}}
+										/>
+									</View>
 								</View>
 							);
 						}}
 					/>
 				) : (
 					<View style={stylesNotFound.container}>
-						<Text style={stylesNotFound.text}>CITIES NOT FOUND</Text>
+						<View style={stylesNotFound.textContainer}>
+							<Text style={stylesNotFound.text}>NO ITINERARIES YET</Text>
+						</View>
 					</View>
 				)}
 			</View>
@@ -126,75 +203,39 @@ const ItinerariesScreen = ({ navigation, route }) => {
 
 export default ItinerariesScreen;
 
-const styles = StyleSheet.create({
+const stylesCardItinerary = StyleSheet.create({
 	container: {
-		flex: 1,
-		backgroundColor: "#30475E",
+		margin: 30,
+		borderColor: "#F05454",
+		borderWidth: 5,
 	},
-	// text: {
-	// 	textAlign: "center",
-	// },
+	textContainer: {
+		backgroundColor: "#f5f5f5",
+		paddingTop: 10,
+	},
+	text: {
+		textAlign: "center",
+		fontSize: 18,
+	},
 });
-
 const stylesNotFound = StyleSheet.create({
 	container: {
 		backgroundColor: "#30475E",
 		height: "100%",
 		borderRadius: 34,
 	},
-	text: {
+	textContainer: {
 		textAlign: "center",
 		fontSize: 25,
 		padding: 10,
 		backgroundColor: "#f5f5f5",
 		margin: 30,
-	},
-});
-
-const stylesCitiesScreen = StyleSheet.create({
-	citiesContainer: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: "#30475E",
-	},
-});
-
-const stylesInput = StyleSheet.create({
-	input: {
-		height: 40,
-		margin: 12,
-		borderWidth: 1,
-		padding: 10,
-		backgroundColor: "#f5f5f5",
-		borderRadius: 10,
-		fontSize: 20,
-	},
-});
-
-const stylesCardItinerary = StyleSheet.create({
-	container: {
-		flex: 1,
-		borderColor: "#F05454",
-		borderWidth: 10,
-		borderRadius: "10%",
-		marginBottom: 20,
-		width: 280,
-		marginTop: 15,
+		borderRadius: 20,
+		borderWidth: 5,
 	},
 	text: {
 		textAlign: "center",
-		backgroundColor: "#f5f5f5",
 		fontSize: 20,
-	},
-});
-
-const styleAction = StyleSheet.create({
-	buttonTravel: {
-		// backgroundColor: "#f5f5f5",
-		padding: 10,
-		borderRadius: 5,
-		borderColor: "#f5f5f5",
-		borderWidth: 2,
+		padding: 5,
 	},
 });

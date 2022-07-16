@@ -4,17 +4,19 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useEffect } from "react";
 import citiesActions from "../redux/actions/citiesActions";
-import { useDispatch } from "react-redux";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import usersActions from "../redux/actions/usersActions";
+import { useDispatch, useSelector } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 //Stack Screens
 
 import CitiesStackScreen from "./stackScreens/CitiesStackScreen";
 import HomeStackScreen from "./stackScreens/HomeStackScreen";
-import SignUpScreen from "./screens/SignUpScreen";
+import LogInStackScreen from "./stackScreens/LogInStackScreen";
 
 // //Screen names
 
-const formName = "SignUp";
+const logInName = "MyAccount";
 const itinerariesName = "Itineraries";
 
 const Tab = createBottomTabNavigator();
@@ -25,6 +27,25 @@ const MainContainer = () => {
 		dispatch(citiesActions.getCities());
 		//eslint-disable-next-line
 	}, []);
+
+	useEffect(() => {
+		getData();
+		//eslint-disable-next-line
+	}, []);
+
+	const getData = async () => {
+		try {
+			const token = await AsyncStorage.getItem("token");
+			if (token !== null) {
+				dispatch(usersActions.verifyToken(token));
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const user = useSelector((store) => store.usersReducer.user);
+	console.log(user);
 
 	return (
 		<NavigationContainer>
@@ -39,7 +60,7 @@ const MainContainer = () => {
 							iconName = focused ? "home" : "home-outline";
 						} else if (routeName === "MyCities") {
 							iconName = focused ? "earth" : "earth-outline";
-						} else if (routeName === formName) {
+						} else if (routeName === logInName) {
 							iconName = focused ? "person" : "person-outline";
 						} else if (routeName === itinerariesName) {
 							iconName = focused ? "reader" : "reader-outline";
@@ -67,9 +88,9 @@ const MainContainer = () => {
 				/>
 				{/* <Tab.Screen name={itinerariesName} component={ItinerariesScreen} /> */}
 				<Tab.Screen
-					name={formName}
+					name={logInName}
 					// options={{ headerShown: false }}
-					component={SignUpScreen}
+					component={LogInStackScreen}
 				/>
 			</Tab.Navigator>
 		</NavigationContainer>

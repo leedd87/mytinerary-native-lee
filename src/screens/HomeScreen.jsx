@@ -5,16 +5,19 @@ import {
 	View,
 	ScrollView,
 	TouchableOpacity,
-} from "react-native"; //componente StyleSheet para estilos ya que react-native no puede cargar hojas de estilo
+} from "react-native";
 import Hero from "../components/Hero";
-// import ActionTravel from "../components/ActionTravel";
 import Carousel from "../components/Carousel";
 import PopularText from "../components/PopularText";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import usersActions from "../../redux/actions/usersActions";
+import citiesActions from "../../redux/actions/citiesActions";
 
 export default function HomeScreen({ navigation }) {
 	return (
 		<ScrollView>
-			{/* <Navigation /> */}
 			<Hero />
 			<View style={styleAction.container}>
 				<Text style={styleAction.actionText}>Discover Korea with Us</Text>

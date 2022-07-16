@@ -1,4 +1,5 @@
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // const url = "http://localhost:4000/";
 const url = "https://mytinerary-lee-backend.herokuapp.com/";
@@ -30,7 +31,11 @@ const usersActions = {
 			const res = await axios.post(url + "api/users/signin", { logedUser });
 
 			if (res.data.success) {
-				localStorage.setItem("token", res.data.response.token);
+				try {
+					await AsyncStorage.setItem("token", res.data.response.token);
+				} catch (error) {
+					console.log(error);
+				}
 				dispatch({
 					type: "SIGN_IN",
 					payload: {
@@ -58,8 +63,13 @@ const usersActions = {
 
 	signOutUser: () => {
 		//parametro de deslogueo
+
 		return async (dispatch, getState) => {
-			localStorage.removeItem("token");
+			try {
+				await AsyncStorage.removeItem("token");
+			} catch (error) {
+				console.log(error);
+			}
 			dispatch({ type: "SIGN_OUT", payload: null });
 		};
 	},
@@ -84,7 +94,13 @@ const usersActions = {
 							},
 						}); //revisar si anda mal
 					} else {
-						localStorage.removeItem("token");
+						removeToken = async () => {
+							try {
+								await AsyncStorage.removeItem("token");
+							} catch (error) {
+								console.log(error);
+							}
+						};
 					}
 				})
 				.catch((error) => {
@@ -99,7 +115,13 @@ const usersActions = {
 								success: false,
 							},
 						});
-					localStorage.removeItem("token");
+					removeToken = async () => {
+						try {
+							await AsyncStorage.removeItem("token");
+						} catch (error) {
+							console.log(error);
+						}
+					};
 				});
 		};
 	},
