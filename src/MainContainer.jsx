@@ -24,11 +24,6 @@ const Tab = createBottomTabNavigator();
 const MainContainer = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(citiesActions.getCities());
-		//eslint-disable-next-line
-	}, []);
-
-	useEffect(() => {
 		getData();
 		//eslint-disable-next-line
 	}, []);

@@ -16,6 +16,11 @@ import usersActions from "../../redux/actions/usersActions";
 import citiesActions from "../../redux/actions/citiesActions";
 
 export default function HomeScreen({ navigation }) {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(citiesActions.getCities());
+		//eslint-disable-next-line
+	}, []);
 	return (
 		<ScrollView>
 			<Hero />
@@ -23,7 +28,10 @@ export default function HomeScreen({ navigation }) {
 				<Text style={styleAction.actionText}>Discover Korea with Us</Text>
 				<TouchableOpacity
 					style={styleAction.buttonTravel}
-					onPress={() => navigation.navigate("MyCities")}
+					onPress={() => {
+						navigation.navigate("MyCities");
+						alert("Welcome to Cities🤩");
+					}}
 				>
 					<Text style={{ color: "#fff", textAlign: "center" }}>
 						Travel

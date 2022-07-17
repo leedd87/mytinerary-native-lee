@@ -111,9 +111,6 @@ const styles = StyleSheet.create({
 		backgroundColor: "#30475E", // "#30475E",
 		height: 600,
 	},
-	// text: {
-	// 	textAlign: "center",
-	// },
 });
 
 const stylesNotFound = StyleSheet.create({
@@ -137,8 +134,6 @@ const stylesCitiesScreen = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		backgroundColor: "#30475E",
-		borderBottomEndRadius: 34,
-		borderBottomStartRadius: 34,
 	},
 });
 
@@ -164,11 +159,6 @@ const stylesCard = StyleSheet.create({
 		marginBottom: 30,
 		width: 320,
 		marginTop: 15,
-
-		// backgroundColor: "#F05454",
-		// padding: 10,
-
-		// justifyContent: "center",
 	},
 	text: {
 		textAlign: "center",

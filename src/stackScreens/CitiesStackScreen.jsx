@@ -6,6 +6,7 @@ import CitiesScreen from "../screens/CitiesScreen";
 import CitiesCards from "../components/CitiesCards";
 import ActivitiesScreen from "../screens/ActivitiesScreen";
 import CommentsScreen from "../screens/CommentsScreen";
+import LogInScreen from "../screens/LogInScreen";
 
 const CitiesStack = createNativeStackNavigator();
 const CitiesStackScreen = () => {
@@ -20,6 +21,7 @@ const CitiesStackScreen = () => {
 			<CitiesStack.Screen name="Itineraries" component={ItinerariesScreen} />
 			<CitiesStack.Screen name="Activities" component={ActivitiesScreen} />
 			<CitiesStack.Screen name="Comments" component={CommentsScreen} />
+			<CitiesStack.Screen name="LogIn" component={LogInScreen} />
 		</CitiesStack.Navigator>
 	);
 };

@@ -97,9 +97,9 @@ const ItinerariesScreen = ({ navigation, route }) => {
 											<Text style={stylesCardItinerary.text}>
 												❤️{item.likes.length} likes
 											</Text>
-											<Text style={stylesCardItinerary.text}>
+											{/* <Text style={stylesCardItinerary.text}>
 												🤍{item.likes.length} likes
-											</Text>
+											</Text> LIKE DISLIKE HABILITAR LUEGO*/}
 										</View>
 									</View>
 

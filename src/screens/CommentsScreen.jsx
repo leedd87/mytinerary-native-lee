@@ -11,7 +11,7 @@ import itinerariesActions from "../../redux/actions/itinerariesActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-const CommentsScreen = ({ route }) => {
+const CommentsScreen = ({ route, navigation }) => {
 	let ScreenHeight = Dimensions.get("window").height;
 	const { id } = route.params;
 	console.log(id);
@@ -23,7 +23,8 @@ const CommentsScreen = ({ route }) => {
 	const itinerary = useSelector((store) => store.itinerariesReducer.itinerary);
 	console.log(itinerary.comments);
 	return (
-		<View>
+		<View style={{ flex: 1, backgroundColor: "#30475E" }}>
+			{/*FLEX PONE PANTALLA COMPLETA, sospecho que el screenheight de abajo funciona*/}
 			<FlatList
 				style={{ height: ScreenHeight, backgroundColor: "#30475E" }}
 				data={itinerary.comments && itinerary.comments}
@@ -42,36 +43,35 @@ const CommentsScreen = ({ route }) => {
 									// style={{ height: 65, width: 65, borderRadius: 50 }}
 									style={stylesCard.image}
 								/>
-								<Text
-									style={stylesCard.text}
-									onPress={() =>
-										navigation.navigate("Itineraries", {
-											id: item._id,
-										})
-									}
-								>
-									{item.comment}
-								</Text>
+								<Text style={stylesCard.text}>{item.comment}</Text>
 							</View>
 						</View>
 					);
 				}}
 			/>
+			<View style={style.login}>
+				<View style={style.pleaseLogIn}>
+					<Text style={style.pleaseLogInText}>
+						Log in to leave a comment
+					</Text>
+				</View>
+				<View style={style.ctaLogIn}>
+					<Text
+						onPress={() => {
+							navigation.navigate("LogIn");
+						}}
+						style={style.ctaBtn}
+					>
+						Log In
+					</Text>
+					<Text style={style.ctaBtn}>Sign Up</Text>
+				</View>
+			</View>
 		</View>
 	);
 };
 
 export default CommentsScreen;
-
-const stylesCommentsScreen = StyleSheet.create({
-	citiesContainer: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: "#30475E",
-		width: "100%",
-	},
-});
 
 //CITIES CARD STYLES
 const stylesCard = StyleSheet.create({
@@ -101,5 +101,42 @@ const stylesCard = StyleSheet.create({
 		width: 65,
 		borderRadius: 50,
 		margin: 5,
+	},
+});
+
+const style = StyleSheet.create({
+	pleaseLogIn: {
+		alignItems: "center",
+		justifyContent: "center",
+		height: "50%",
+		fontWeight: "bold",
+	},
+
+	ctaLogIn: {
+		flexDirection: "row",
+		justifyContent: "center",
+		alignItems: "center",
+		textAlign: "center",
+		height: "50%",
+	},
+	ctaBtn: {
+		marginHorizontal: 10,
+		color: "white",
+		borderWidth: 1,
+		paddingVertical: 2,
+		paddingHorizontal: 10,
+		backgroundColor: "#F05454",
+		borderRadius: 5,
+		fontWeight: "bold",
+	},
+	login: {
+		marginBottom: 10,
+		backgroundColor: "white",
+		height: 60,
+		marginHorizontal: 10,
+		borderWidth: 2,
+		borderColor: "rgba(94, 94, 94, 0.2)",
+		borderRadius: 5,
+		borderColor: "#F05454",
 	},
 });
